@@ -3,29 +3,32 @@ const UserModel = require("../models/UserSchema");
 
 const router = express.Router();
 
+//* See all Users | Main Route
 router.get("/", async (req, res) => {
   try {
     const users = await UserModel.find({});
-    res.send(URLSearchParams);
+    res.send(users);
   } catch (error) {
     console.log(error);
     res.status(403).send("Cannot get");
   }
 });
 
+//* See user with specific ID
 router.get("/:id", async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.id);
-    res.send(blog);
+    res.send(user);
   } catch (error) {
     console.log(error);
     res.status(403).send("Cannot get");
   }
 });
 
-//POST: CREATE a New Blog
+//* POST: CREATE a New User
 router.post("/", async (req, res) => {
   try {
+    const userAlreadyExist = await UserModel.find({ email: req.body.email });
     const newUser = await UserModel.create(req.body);
     res.send(newUser);
   } catch (error) {
@@ -34,7 +37,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// PUT: Update by ID
+//* PUT: Update User by ID
 router.put("/:id", async (req, res) => {
   try {
     const updatedUser = await UserModel.findByIdAndUpdate(
@@ -49,10 +52,13 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-//Delete
+//* Delete User by ID
 router.delete("/:id", async (req, res) => {
   try {
     const deletedUser = await UserModel.findByIdAndRemove(req.params.id);
+    if (userAlreadyExist[0]) {
+      return res.send("User Already exist!");
+    }
     console.log(deletedUser);
     res.send("User Deleted");
   } catch (error) {

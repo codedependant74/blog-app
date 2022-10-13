@@ -7,14 +7,19 @@ const app = express();
 
 const PORT = 3000;
 
+app.use(express.static("public"));
 app.use(morgan("dev"));
 app.use(express.json());
+
+// App settings
+app.set("view engine", "jsx");
+app.engine("jsx", require("express-react-views").createEngine());
 
 app.use("/blog", require("./controllers/BlogRouter"));
 app.use("/user", require("./controllers/UserRouter"));
 
 app.get("/", (req, res) => {
-  res.send("Hello");
+  res.render("pages/HomePages");
 });
 
 app.listen(PORT, () => {
