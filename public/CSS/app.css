@@ -1,26 +1,37 @@
-@import url('https://fonts.googleapis.com/css?family=Comfortaa|Righteous');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 
 body {
-  background: url(https://images.clipartlogo.com/files/istock/previews/8741/87414357-apple-seamless-pastel-colors-pattern-fruits-texture-background.jpg);
+  background-color: #e8d1c5;
   margin: 0;
-  font-family: 'Comfortaa', cursive;
+  font-family: 'Quicksand', sans-serif;
 }
 
 h1 {
-  font-family: 'Righteous', cursive;
-  background: antiquewhite;
+  font-size: 70px;
+  background: #eeddd3;
   margin:0;
   margin-bottom: .5em;
   padding: 1em;
   text-align: center;
 }
 
+h2 {
+  padding-left: 1em;
+  font-size: 40px;
+  text-decoration: underline;
+}
+
+p {
+  padding: .5em;
+  text-align: center;
+}
+
 a {
-  color: orange;
+  color: #FFF1E6;
   text-decoration: none;
   text-shadow: 1px 1px 1px black;
   font-size: 1.5em;
-  background: rgba(193, 235, 187, .9);
+  background: #EDEDE8;
 }
 
 a:hover {

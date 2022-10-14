@@ -3,6 +3,7 @@ const BlogModel = require("../models/BlogSchema");
 
 const router = express.Router();
 
+//* Get all blogs
 router.get("/", async (req, res) => {
   try {
     const blogs = await BlogModel.find({});
@@ -13,28 +14,55 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/new", async (req, res) => {
   try {
-    const blog = await BlogModel.findById(req.params.id);
-    res.send(blog);
+    const newPost = await BlogModel.find({});
+    res.render("Blogs/New", { newblog: newPost });
   } catch (error) {
     console.log(error);
     res.status(403).send("Cannot get");
   }
 });
 
-//POST: CREATE a New Blog
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const updatedBlog = await BlogModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { returnDocument: "after" }
+    );
+    res.redirect(`/blog/${blog.id}/edit`);
+  } catch (error) {
+    console.log(error);
+    res.status(403).send("Cannot get");
+  }
+});
+
+//* Get blog by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const blog = await BlogModel.findById(req.params.id);
+    res.render("Blogs/Show", { blog: blog });
+  } catch (error) {
+    console.log(error);
+    res.status(403).send("Cannot get");
+  }
+});
+
+//* POST: CREATE a New Blog
 router.post("/", async (req, res) => {
   try {
     const newBlog = await BlogModel.create(req.body);
-    res.send(newBlog);
+    res.redirect("/blog");
   } catch (error) {
     console.log(error);
     res.status(403).send("Cannot create");
   }
 });
 
-// PUT: Update by ID
+// const updatedBlog = await BlogModel.findByIdAndUpdate(req.params.id, req.body, {'returnDocument' : "after"})
+
+//* PUT: Update by ID
 router.put("/:id", async (req, res) => {
   try {
     const updatedBlog = await BlogModel.findByIdAndUpdate(
@@ -49,7 +77,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-//Delete
+//* Delete
 router.delete("/:id", async (req, res) => {
   try {
     const deletedBlog = await BlogModel.findByIdAndRemove(req.params.id);
