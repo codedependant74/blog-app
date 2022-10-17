@@ -3,7 +3,8 @@ const Navbar = require("../components/Navbar");
 
 class Blogs extends React.Component {
   render() {
-    const { blogs } = this.props;
+    const { blogs, loggedInUser } = this.props;
+    console.log(loggedInUser);
     return (
       <div>
         <head>
@@ -24,9 +25,15 @@ class Blogs extends React.Component {
               <div>
                 <p>{blog.body}</p>
               </div>
-              <h6>Written by: {blog.author}</h6>
+              <h6 style={styles.name}>Written by: {blog.author}</h6>
               <br />
-              <a href={`/blog/${blog._id}/edit`}>Edit Blog Post</a>
+              {blog.author === loggedInUser ? (
+                <div>
+                  <a href={`/blog/${blog._id}/edit`} style={styles.btn}>
+                    Edit
+                  </a>
+                </div>
+              ) : null}
             </div>
           ))}
         </section>
@@ -34,5 +41,21 @@ class Blogs extends React.Component {
     );
   }
 }
+
+const styles = {
+  name: {
+    margin: "30px",
+    fontSize: "20px",
+    color: "#d4a373",
+  },
+  btn: {
+    margin: "auto 20px auto 20px",
+    padding: "7px",
+    border: "1px solid black",
+    borderRadius: "30px",
+    color: "#d9af82",
+    backgroundColor: "#EEDDD3",
+  },
+};
 
 module.exports = Blogs;

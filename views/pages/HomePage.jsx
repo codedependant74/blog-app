@@ -62,7 +62,7 @@ class HomePage extends React.Component {
               eligendi minus. Officiis ipsam accusantium perferendis velit,
               pariatur voluptatum mollitia?
             </p>
-            <span>Author: Brenda</span>
+            <span style={styles.name}>Author: Brenda</span>
           </div>
         </section>
       </div>
@@ -78,6 +78,10 @@ const styles = {
     borderRadius: "50%",
     objectFit: "fill",
     marginLeft: "20px",
+  },
+  name: {
+    margin: "30px",
+    fontSize: "20px",
   },
 };
 
