@@ -28,7 +28,7 @@ router.get("/signin", (req, res) => {
 // Signout User and destroy session
 router.get("/signout", (req, res) => {
   try {
-    req.session.destroy;
+    req.session.destroy();
     res.redirect("/");
   } catch (error) {
     console.log(error);

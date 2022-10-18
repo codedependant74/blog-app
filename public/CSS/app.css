@@ -24,6 +24,7 @@ h2 {
 p {
   padding: .5em;
   text-align: center;
+  margin: 30px
 }
 
 a {
@@ -56,4 +57,17 @@ input[type=submit] {
   background: mediumseagreen;
   font-size: 1em;
   border-radius: 10%;
+}
+.blogContainer{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+  
+.blogBody{
+ width: 30%;
+ display: flex;
+ justify-content: center;
 }

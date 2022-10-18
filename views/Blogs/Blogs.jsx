@@ -11,18 +11,18 @@ class Blogs extends React.Component {
           <link rel="stylesheet" href="/CSS/app.css" />
         </head>
 
-        <Navbar />
+        <Navbar loggedInUser={loggedInUser} />
 
         <h1>Blogs</h1>
 
-        <section>
+        <section className="blogContainer">
           {blogs.map((blog) => (
             <div>
               <a href={`/blog/${blog._id}`}>
                 {" "}
                 <h2>{blog.title}</h2>
               </a>
-              <div>
+              <div className="blogBody">
                 <p>{blog.body}</p>
               </div>
               <h6 style={styles.name}>Written by: {blog.author}</h6>
@@ -30,7 +30,7 @@ class Blogs extends React.Component {
               {blog.author === loggedInUser ? (
                 <div>
                   <a href={`/blog/${blog._id}/edit`} style={styles.btn}>
-                    Edit
+                    Edit Blog
                   </a>
                 </div>
               ) : null}
